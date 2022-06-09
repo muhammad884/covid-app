@@ -11,5 +11,5 @@ cd frontend
 npm install
 
 # Run server
-npm run server
+npm run dev
 
