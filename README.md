@@ -8,6 +8,7 @@ in nodemailer file for sending emails
 npm install
 # frontend deps
 cd frontend
+&
 npm install
 
 # Run server
