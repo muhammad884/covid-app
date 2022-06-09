@@ -1,0 +1,8 @@
+1. authenticated routes => thrugh helper function or router
+2. use State management tool like context api or redux
+3. useEffect only used for api calling
+4. if state object is complex or more then boolena use useReducer
+
+
+
+logo = https://png.pngtree.com/png-clipart/20210418/original/pngtree-variant-metal-texture-variant-covid-19-coronavirus-png-image_6225502.jpg
