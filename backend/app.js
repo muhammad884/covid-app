@@ -1,3 +1,4 @@
+import path from "path";
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
@@ -11,7 +12,9 @@ import PersonTravelRouter from "./routes/PersonTravelRoute.js";
 const app = express();
 const port = process.env.PORT || 4000;
 const DATABASE_URL = process.env.DATABASE_URL;
-
+const __dirname = path.resolve(
+  path.dirname(decodeURI(new URL(import.meta.url).pathname))
+);
 // cors policy
 app.use(cors());
 // Database connection
@@ -34,3 +37,16 @@ app.use("/covid/person/travel", PersonTravelRouter);
 app.listen(port, () => {
   console.log(`server listeing at port: ${port}`);
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "../", "frontend", "build", "index.html")
+    );
+  });
+} else {
+  app.get("*", (req, res) => {
+    res.send("Please use the production server");
+  });
+}
