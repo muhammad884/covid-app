@@ -164,7 +164,7 @@ const sendEmail = async (req, res) => {
     if (!admin) {
       return res.status(401).json({ msg: "Admin not found" });
     }
-    const link = `http://localhost:3000/covid/agent/register`;
+    const link = `http://covid/agent/register`;
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {

@@ -1,6 +1,6 @@
 import axios from "axios";
-const API_URL = "http://localhost:3001/covid/";
-
+// const API_URL = "http://localhost:3001/covid/";
+const API_URL = "/covid/";
 //@desc admin login service and set admin in local storage
 const adminLogin = (email, password) => {
   return axios

@@ -1,6 +1,6 @@
 import axios from "axios";
-const API_URL = "http://localhost:3001/covid/";
-
+// const API_URL = "http://localhost:3001/covid/";
+const API_URL = "/covid/";
 // @desc get current agent
 const getCurrentAgent = () => {
   const token = localStorage.getItem("agent");

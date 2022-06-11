@@ -1,5 +1,6 @@
 import axios from "axios";
-const API_URL = "http://localhost:3001/covid/";
+// const API_URL = "http://localhost:3001/covid/";
+const API_URL = "/covid/";
 
 // @desc add person
 // @route  POST covid/person/register

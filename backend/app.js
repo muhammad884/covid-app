@@ -10,7 +10,7 @@ import PersonRouter from "./routes/PersonRoute.js";
 import PersonTravelRouter from "./routes/PersonTravelRoute.js";
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3001;
 const DATABASE_URL = process.env.DATABASE_URL;
 const __dirname = path.resolve(
   path.dirname(decodeURI(new URL(import.meta.url).pathname))
