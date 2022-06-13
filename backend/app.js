@@ -34,10 +34,6 @@ app.use("/covid/person", PersonRouter);
 // person travel routes
 app.use("/covid/person/travel", PersonTravelRouter);
 
-app.listen(port, () => {
-  console.log(`server listeing at port: ${port}`);
-});
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
   app.get("*", (req, res) => {
@@ -46,7 +42,11 @@ if (process.env.NODE_ENV === "production") {
     );
   });
 } else {
-  app.get("*", (req, res) => {
+  app.get("/", (req, res) => {
     res.send("Please use the production server");
   });
 }
+
+app.listen(port, () => {
+  console.log(`server listeing at port: ${port}`);
+});
