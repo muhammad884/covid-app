@@ -50,6 +50,14 @@ if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => res.send("Please set to production"));
 }
 
-app.listen(port, () => {
-  console.log(`server listeing at port: ${port}`);
-});
+// if (process.env.NODE_ENV === "production") {
+//   //set static folder
+//   app.use(express.static("client/build"));
+// }
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// });
+
+// app.listen(port, () => {
+//   console.log(`server listeing at port: ${port}`);
+// });
