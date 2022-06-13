@@ -13,9 +13,9 @@ import PersonTravelRouter from "./routes/PersonTravelRoute.js";
 const app = express();
 const port = process.env.PORT || 3001;
 const DATABASE_URL = process.env.DATABASE_URL;
-const __dirname = path.resolve(
-  path.dirname(decodeURI(new URL(import.meta.url).pathname))
-);
+// const __dirname = path.resolve(
+//   path.dirname(decodeURI(new URL(import.meta.url).pathname))
+// );
 // cors policy
 app.use(cors());
 // Database connection
@@ -47,10 +47,10 @@ app.use("/covid/person/travel", PersonTravelRouter);
 //   });
 // }
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("frontend/build"));
-  app.get("/*", function (req, res) {
-    res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("./frontend/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
   });
 }
 
