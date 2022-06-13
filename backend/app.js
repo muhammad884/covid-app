@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import cors from "cors";
-import { errorHandler } from "./middleware/errorMiddleware";
+// import { errorHandler } from "./middleware/errorMiddleware";``
 import connectDB from "./config/connectdb.js";
 import AdminRouter from "./routes/AdminRoute.js";
 import AgentRouter from "./routes/AgentRoute.js";
@@ -52,9 +52,13 @@ if (process.env.NODE_ENV == "production") {
   app.get("/", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
   });
+} else {
+  app.get("/", (req, res) => {
+    res.send("Please use the production server");
+  });
 }
 
-app.use(errorHandler);
+// app.use(errorHandler);
 app.listen(port, () => {
   console.log(`server listeing at port: ${port}`);
 });
