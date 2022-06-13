@@ -35,30 +35,21 @@ app.use("/covid/person", PersonRouter);
 // person travel routes
 app.use("/covid/person/travel", PersonTravelRouter);
 
-// if (process.env.NODE.ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "frontend", "build")));
+import * as url from "url";
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
-//   });
-// } else {
-//   app.get("/", (req, res) => {
-//     res.send("Please use the production server");
-//   });
-// }
+// app.use(errorHandler);
+// Catch all unknown routes ( this middleware runs after all routes have been defined !)
+if (process.env.NODE_ENV === "production") {
+  // Serve static files
+  app.use(express.static(path.resolve(__dirname, "../frontend", "build")));
 
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static("./frontend/build"));
-  app.get("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.send("Please use the production server");
+  app.get("*", (req, res, next) => {
+    // Serve index.html file if it doesn't recognize the route
+    res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html")); // <- Here !
   });
 }
 
-// app.use(errorHandler);
 app.listen(port, () => {
   console.log(`server listeing at port: ${port}`);
 });
