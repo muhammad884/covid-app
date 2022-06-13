@@ -14,3 +14,5 @@ npm install
 # Run server
 npm run dev
 
+# Demo
+http://covidatatracker.herokuapp.com/
