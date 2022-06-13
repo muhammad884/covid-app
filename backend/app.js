@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import cors from "cors";
+import { errorHandler } from "./middleware/errorMiddleware";
 import connectDB from "./config/connectdb.js";
 import AdminRouter from "./routes/AdminRoute.js";
 import AgentRouter from "./routes/AgentRoute.js";
@@ -21,7 +22,7 @@ app.use(cors());
 connectDB(DATABASE_URL);
 // jsosn parser
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: false }));
 // load routes
 app.use("/covid/admin", AdminRouter);
 
@@ -36,8 +37,10 @@ app.use("/covid/person/travel", PersonTravelRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
-  app.get("/*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "./", "frontend/build/index.html"));
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "../", "frontend", "build", "index.html")
+    );
   });
 } else {
   app.get("/", (req, res) => {
@@ -45,6 +48,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+app.use(errorHandler);
 app.listen(port, () => {
   console.log(`server listeing at port: ${port}`);
 });
