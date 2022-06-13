@@ -38,25 +38,17 @@ app.use("/covid/person/travel", PersonTravelRouter);
 import * as url from "url";
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-//   app.get("*", (req, res) =>
-//     res.sendFile(
-//       path.resolve(__dirname, "../", "frontend", "build", "index.html")
-//     )
-//   );
-// } else {
-//   app.get("/", (req, res) => res.send("Please set to production"));
-// }
-
 if (process.env.NODE_ENV === "production") {
-  //set static folder
-  app.use(express.static("frontend/build"));
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, "../", "frontend", "build", "index.html")
+    )
+  );
+} else {
+  app.get("/", (req, res) => res.send("Please set to production"));
 }
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-});
 
 app.listen(port, () => {
   console.log(`server listeing at port: ${port}`);
